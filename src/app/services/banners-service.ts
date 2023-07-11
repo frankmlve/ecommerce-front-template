@@ -20,3 +20,15 @@ export const getLogoData = async () => {
     })
      
 }
+
+export const getAllProducts = async (params: any) => {
+    const apiUrl = process.env.NEXT_PUBLIC_STRAPI_URL
+    const apiKey = process.env.NEXT_PUBLIC_API_KEY
+    params.populate = '*'
+    return axios.get(`${apiUrl}/products`, {
+        headers: {
+            'Authorization': `Bearer ${apiKey}`
+        }, 
+        params: params
+    })
+}

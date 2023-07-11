@@ -13,7 +13,6 @@ const HeaderComponent =  ({pathname}) => {
     useEffect(() => {
         let ignore = false;
         getLogoData().then(({data} )=> {
-            console.log(data)
             setData(data.data)
         })
         return () => {
