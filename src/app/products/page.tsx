@@ -53,16 +53,17 @@ export default function ProductsPage() {
     const createImgUrl = ((imgPath: string) => {
         return baseApiUrl + imgPath
     })
-    const goToProduct = (id: number) => {
-        router.push(`/products/${id}`)
+    const goTo = (id: number, path: string) => {
+        router.push(`/${path}/${id}`)
     }
     return (
         <div className="container d-flex justify-content-evenly w-75">
             {products.map((prod, index) => <Card product={prod} 
-                handleClick={() => goToProduct(prod.id)}
+                handleClick={() => goTo(prod.id, 'products')}
                 id={prod.id}
                 isThumbnail={false}
-                key={prod.id}/>
+                key={prod.id}
+                indicators={false}/>
              )}
         </div>
     )

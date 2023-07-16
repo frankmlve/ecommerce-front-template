@@ -1,15 +1,18 @@
+'use client'
 import styles from '../../styles/Header.module.scss'
 import Image from "next/image";
 import Link from "next/link";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import React, { useEffect } from "react";
 import { getLogoData } from '@/app/services/banners-service';
+import {usePathname} from "next/navigation";
 
 
-const HeaderComponent =  ({pathname}) => {
-    const baseApiUrl = process.env.NEXT_PUBLIC_STRAPI_BASE_URL
+const HeaderComponent =  () => {
+    const baseApiUrl = `${process.env.NEXT_PUBLIC_STRAPI_BASE_URL}`
     const [data, setData] = React.useState();
     
+    const router = usePathname()
     useEffect(() => {
         let ignore = false;
         getLogoData().then(({data} )=> {
@@ -47,7 +50,7 @@ const HeaderComponent =  ({pathname}) => {
                 <ul className={'nav nav-underline'}>
                     {navLinks.map((link) =>
                         <li className={'nav-item'} key={link.key}>
-                            <Link href={link.value} className={'nav-link ' + ( pathname === link.value ? 'active' : '')}>{link.label}</Link>
+                            <Link href={link.value} className={'nav-link ' + ( router === link.value ? 'active' : '')}>{link.label}</Link>
                         </li>
                     )}
                 </ul>

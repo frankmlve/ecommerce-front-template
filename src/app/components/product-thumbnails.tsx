@@ -8,11 +8,13 @@ import { ProductCategoryModel } from "../models/product-category"
 import { getAllCategories } from "../services/categories-service"
 import Link from "next/link"
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { useRouter } from "next/navigation"
 
 export default function ProductThumbnails() {
     const [products, setProducts] = React.useState<ProductModel[]>([]);
     const [categories, setCategories] = React.useState<ProductCategoryModel[]>([]);
     const baseApiUrl = process.env.NEXT_PUBLIC_STRAPI_BASE_URL
+    const router = useRouter()
 
     const createImgUrl = ((imgPath: string) => {
         return baseApiUrl + imgPath
@@ -75,7 +77,8 @@ export default function ProductThumbnails() {
                     {products.filter(prod => prod.categories.flatMap(({id}) => id).includes(category.id)).map((product) => 
                         <div className="col-sm-3 mb-3 mb-sm-0" key={product.id}>
                             <Card product={product}
-                            handleClick={() => {}}/>
+                            isThumbnail={true}
+                            handleClick={() => router.push(`/products/${product.id}`)}/>
                         </div>
                     )}
                     <Link href={'/products'} className="w-auto"><span>More</span></Link>

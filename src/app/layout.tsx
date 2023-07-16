@@ -1,9 +1,8 @@
-'use client'
+// 'use client'
 import './globals.css'
 import { Inter } from 'next/font/google'
 import HeaderComponent from "@/app/components/header/header";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {usePathname} from "next/navigation";
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -17,11 +16,10 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
-    const router = usePathname()
   return (
     <html lang="en">
       <body className={inter.className}>
-          <HeaderComponent pathname={router}/>
+          <HeaderComponent/>
           <div style={{marginTop: '7rem'}}>
             {children}
           </div>
